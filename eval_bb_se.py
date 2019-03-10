@@ -73,8 +73,7 @@ model_name = 'se_resnext101_32x4d'
 model = pretrainedmodels.__dict__[model_name](num_classes=1000, pretrained='imagenet')
 model.avg_pool = nn.AdaptiveAvgPool2d((1, 1))
 model.last_linear = nn.Sequential(*[nn.LayerNorm(model.last_linear.in_features, elementwise_affine = False),
-                                nn.AlphaDropout(p=0.1),
-                            NormLinear(model.last_linear.in_features, 5004)])
+                                        NormLinear(model.last_linear.in_features, 5004)])
 
 model = model.to(device)
 model = nn.DataParallel(model)                           
